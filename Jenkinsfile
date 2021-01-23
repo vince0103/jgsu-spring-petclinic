@@ -3,7 +3,7 @@
 
 pipeline {
     agent any
-    triggers { pollSCM('* * * * *') }
+    // triggers { pollSCM('* * * * *') }
     stages {
         // implicit checkout stage
 
@@ -17,6 +17,8 @@ pipeline {
     post {
         always {
             junit '**/target/surefire-reports/TEST-*.xml'
+        }
+        success {
             archiveArtifacts 'target/*.jar'
         }
     }
